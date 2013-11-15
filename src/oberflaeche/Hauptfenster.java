@@ -1,11 +1,16 @@
 package oberflaeche;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Hauptfenster extends JFrame {
 
@@ -15,28 +20,49 @@ public class Hauptfenster extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		
+		System.out.println("Start Main");
+		EventQueue.invokeLater(new Runnable() {                         // Nach beenden der Main ausführen
 			public void run() {
+				System.out.println("start run");
 				try {
-					Hauptfenster frame = new Hauptfenster();
-					frame.setVisible(true);
-				} catch (Exception e) {
+					Hauptfenster frame = new Hauptfenster();            // HaupfensterObjekt generieren 
+					frame.setVisible(true);                             // HaupfensterObjekt anzeigen
+				} catch (Exception e) {                                 // Im Fehlerfall der Stack ausgeben
 					e.printStackTrace();
+					
 				}
+				System.out.println("end run");
 			}
+			
 		});
+		
+		System.out.println("end Main");
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Hauptfenster() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		System.out.println("Hauptfenster konstruktor");
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        // beenden des Programms nach Schliessen des Fensters
+		setBounds(100, 100, 450, 300);                         // Fenstergroesse
+		contentPane = new JPanel();                            // neues JPanel (Fenstersgrundlage) 
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));    // Rand festlegen  
+		setContentPane(contentPane);                           // als Fensterinhalt benutzt  
+		contentPane.setLayout(null);                           // statisches Layout
+		
+		
+		final JButton btnSchliessen = new JButton("schliessen");    // button initialisieren
+		btnSchliessen.addActionListener(new ActionListener() {      // Aktionlistener erstellen für ereignisgesteuerte Ausführung 
+			public void actionPerformed(ActionEvent arg0) {         // Festlegen der Aktion beim Klicken des Buttons   
+			btnSchliessen.setBackground(Color.BLUE);
+			}
+		});
+		btnSchliessen.setBounds(345, 238, 89, 23);                 // Postion und Groesse des Buttons festlegen
+		contentPane.add(btnSchliessen);                            // Button im Fenster hinzufügen 
+		
+		System.out.println("end HauptfensterKonstruktor");   
 	}
-
 }
