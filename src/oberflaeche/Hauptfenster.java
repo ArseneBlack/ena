@@ -37,7 +37,7 @@ public class Hauptfenster extends JFrame {
 			
 		});
 		
-		System.out.println("end Main");
+		System.out.println("end Main"); 
 	}
 
 	/**
