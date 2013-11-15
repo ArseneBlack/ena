@@ -46,7 +46,7 @@ public class Hauptfenster extends JFrame {
 		
    //		System.out.println("end Main"); 
 	}
-
+ 
 	/**
 	 * Create the frame.
 	 */
