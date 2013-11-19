@@ -1,5 +1,5 @@
 package fernseher;
 
-public class Hauptfenster {
+public class Hauptfenster { 
 
 }
