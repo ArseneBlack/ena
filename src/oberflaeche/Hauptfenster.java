@@ -65,10 +65,10 @@ public class Hauptfenster extends JFrame {
 		btnSpeichern.addActionListener(new ActionListener() {      // Aktionlistener erstellen für ereignisgesteuerte Ausführung 
 			public void actionPerformed(ActionEvent arg0) {         // Festlegen der Aktion beim Klicken des Buttons   
 			System.out.println("kanal : "+ textKanal.getText());
-			System.out.println("Lautstärke "+ textLautstärke.getText());
+			System.out.println("Lautstärke :"+ textLautstärke.getText());
 			}
 		});
-		btnSpeichern.setBounds(166, 107, 89, 23);                 // Postion und Groesse des Buttons festlegen
+		btnSpeichern.setBounds(150, 109, 114, 23);                 // Postion und Groesse des Buttons festlegen
 		contentPane.add(btnSpeichern);                            // Button im Fenster hinzufügen 
 		
 		textKanal = new JTextField();
@@ -91,6 +91,7 @@ public class Hauptfenster extends JFrame {
 		lblLautsärke.setBounds(20, 48, 79, 14);
 		contentPane.add(lblLautsärke);
 		
+		/*
 		final JLabel lblName2 = new JLabel("");
 		lblName2.setBounds(310, 17, 114, 14);
 		contentPane.add(lblName2);
@@ -102,6 +103,7 @@ public class Hauptfenster extends JFrame {
 		final JLabel lblEmail2 = new JLabel("");
 		lblEmail2.setBounds(310, 79, 114, 14);
 		contentPane.add(lblEmail2);
+		*/
 		
 //		System.out.println("end HauptfensterKonstruktor");   
 	}
