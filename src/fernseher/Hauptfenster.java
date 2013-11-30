@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.LayoutManager;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -16,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JSlider;
+
+import org.omg.PortableInterceptor.SUCCESSFUL;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
@@ -50,11 +53,9 @@ public class Hauptfenster extends JFrame {
 	 */
 	public Hauptfenster() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBounds(100, 100, 450, 300);
-		int height = this.getBounds().height;
+		setBounds(100, 100, 450, 300);
 		int width = this.getBounds().width;
-		Dimension size = this.getBounds().getSize();
-		System.out.println(size);
+		int height = this.getBounds().height;
 		contentPane = new JPanel();
 		contentPane.addMouseListener(new MouseAdapter() {
 			@Override
@@ -75,7 +76,7 @@ public class Hauptfenster extends JFrame {
 				openSettingsWindow();
 			}
 		});
-		btnSettings.setBounds(width + 5, 0 + 5, 116, 23);
+		btnSettings.setBounds(5, 5, 116, 23);
 		components.add(btnSettings);
 
 		JButton btnWerbungUeberbruecken = new JButton("Werbung ueberbruecken");
@@ -86,6 +87,15 @@ public class Hauptfenster extends JFrame {
 		});
 		btnWerbungUeberbruecken.setBounds(134, 193, 89, 23);
 		components.add(btnWerbungUeberbruecken);
+		
+		JButton btnExit = new JButton("Ende");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exit();
+			}
+		});
+		btnExit.setBounds(width - 5, 5, 89, 23);
+		components.add(btnExit);
 
 		JButton btnPause = new JButton("Pause");
 		btnPause.setBounds(136, 227, 89, 23);
@@ -144,5 +154,9 @@ public class Hauptfenster extends JFrame {
 	
 	void werbungUeberbruecken() {
 	
+	}
+	
+	void exit() {
+		System.exit(0);
 	}
 }
