@@ -1,4 +1,4 @@
-package fernseher;
+package oberflaeche;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
