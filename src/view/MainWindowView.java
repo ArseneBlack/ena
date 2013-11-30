@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 
 import javax.swing.JSlider;
