@@ -3,6 +3,7 @@ package oberflaeche;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.LayoutManager;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,7 +23,7 @@ public class Hauptfenster extends JFrame {
 	public static void main(String[] args) {
 		
 		System.out.println("Start Main");
-		EventQueue.invokeLater(new Runnable() {                         // Nach beenden der Main ausführen
+		EventQueue.invokeLater(new Runnable() {                         // Nach beenden der Main ausfï¿½hren
 			public void run() {
 				System.out.println("start run");
 				try {
@@ -55,13 +56,13 @@ public class Hauptfenster extends JFrame {
 		
 		
 		final JButton btnSchliessen = new JButton("schliessen");    // button initialisieren
-		btnSchliessen.addActionListener(new ActionListener() {      // Aktionlistener erstellen für ereignisgesteuerte Ausführung 
+		btnSchliessen.addActionListener(new ActionListener() {      // Aktionlistener erstellen fï¿½r ereignisgesteuerte Ausfï¿½hrung 
 			public void actionPerformed(ActionEvent arg0) {         // Festlegen der Aktion beim Klicken des Buttons   
 			btnSchliessen.setBackground(Color.BLUE);
 			}
 		});
 		btnSchliessen.setBounds(345, 238, 89, 23);                 // Postion und Groesse des Buttons festlegen
-		contentPane.add(btnSchliessen);                            // Button im Fenster hinzufügen 
+		contentPane.add(btnSchliessen);                            // Button im Fenster hinzufï¿½gen 
 		
 		System.out.println("end HauptfensterKonstruktor");   
 	}
