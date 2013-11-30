@@ -55,4 +55,9 @@ public class SettingsView extends JFrame {
 	public void setCloseListener(ActionListener listener) {
 		btnClose.addActionListener(listener);
 	}
+
+	public void disableButtons() {
+		btnPassword.setEnabled(false);
+		btnChannelList.setEnabled(false);
+	}
 }

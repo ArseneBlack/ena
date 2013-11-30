@@ -35,15 +35,15 @@ public class MainWindowView extends JFrame {
 
 	private JButton btnPause = new JButton("Pause");
 
-	private JButton btnVorherigeSender = new JButton("vorheriger sender");
+	private JButton btnPreviousChannel = new JButton("vorheriger sender");
 
-	private JButton btnSenderliste = new JButton("Senderliste");
+	private JButton btnChannelList = new JButton("Senderliste");
 
-	private JButton btnNchsteSender = new JButton("naechster Sender");
+	private JButton btnNextChannel = new JButton("naechster Sender");
 
-	private JButton btnBalkenEntfernen = new JButton("Balken Entfernen");
+	private JButton btnRemoveBorder = new JButton("Balken Entfernen");
 
-	private JButton btnStumm = new JButton("stumm");
+	private JButton btnMute = new JButton("stumm");
 
 	private JSlider volumeSlider = new JSlider();
 
@@ -79,20 +79,20 @@ public class MainWindowView extends JFrame {
 		btnPause.setBounds(136, 227, 89, 23);
 		components.add(btnPause);
 
-		btnVorherigeSender.setBounds(235, 227, 89, 23);
-		components.add(btnVorherigeSender);
+		btnPreviousChannel.setBounds(235, 227, 89, 23);
+		components.add(btnPreviousChannel);
 
-		btnSenderliste.setBounds(334, 227, 89, 23);
-		components.add(btnSenderliste);
+		btnChannelList.setBounds(334, 227, 89, 23);
+		components.add(btnChannelList);
 
-		btnNchsteSender.setBounds(334, 193, 89, 23);
-		components.add(btnNchsteSender);
+		btnNextChannel.setBounds(334, 193, 89, 23);
+		components.add(btnNextChannel);
 
-		btnBalkenEntfernen.setBounds(334, 155, 89, 23);
-		components.add(btnBalkenEntfernen);
+		btnRemoveBorder.setBounds(334, 155, 89, 23);
+		components.add(btnRemoveBorder);
 
-		btnStumm.setBounds(334, 125, 89, 23);
-		components.add(btnStumm);
+		btnMute.setBounds(334, 125, 89, 23);
+		components.add(btnMute);
 
 		volumeSlider.setBounds(235, 88, 200, 26);
 		components.add(volumeSlider);
@@ -129,6 +129,10 @@ public class MainWindowView extends JFrame {
 
 	public void setVolumeListener(ChangeListener listener) {
 		volumeSlider.addChangeListener(listener);
+	}
+	
+	public void setPauseListener(ActionListener listener) {
+		btnPause.addActionListener(listener);
 	}
 
 }

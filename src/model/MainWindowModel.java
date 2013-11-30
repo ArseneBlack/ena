@@ -1,7 +1,9 @@
 package model;
 
+
 public class MainWindowModel {
 	
+	private TvElectronics electronics;
 	private int volume;
 	
 	public int currentVolume() {

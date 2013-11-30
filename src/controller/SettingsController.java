@@ -9,14 +9,20 @@ import view.SettingsView;
 public class SettingsController {
 	private SettingsView view;
 	private SettingsModel model;
+	private PasswordController password;
 	
 	public SettingsController() {
 		model = new SettingsModel();
 		view = new SettingsView(model);
+		password = new PasswordController();
 		addListeners();
 	}
 	
 	public void showView() {
+		if (password.isSet()) {
+			view.disableButtons();
+			password.authenticate();
+		}
 		view.setVisible(true);
 	}
 	
@@ -28,7 +34,7 @@ public class SettingsController {
 	
 	class PasswordListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
-			// TODO implement
+			password.showView();
 		}
 	}
 	
