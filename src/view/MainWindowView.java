@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
@@ -12,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeListener;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import javax.swing.JButton;
 
@@ -20,7 +22,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JSlider;
 
-import model.HauptfensterModel;
+import model.MainWindowModel;
 
 import org.omg.PortableInterceptor.SUCCESSFUL;
 
@@ -32,19 +34,18 @@ import java.util.List;
 import java.util.Set;
 import java.awt.event.MouseAdapter;
 
-public class HauptfensterView extends JFrame {
+public class MainWindowView extends JFrame {
 
 	private JPanel contentPane;
 
-	private HauptfensterModel model;
+	private MainWindowModel model;
 
 	private List<JComponent> components = new LinkedList<JComponent>();
 
 	// Buttons
 	private JButton btnSettings = new JButton("Einstellungen");
 
-	private JButton btnWerbungUeberbruecken = new JButton(
-			"Werbung ueberbruecken");
+	private JButton btnSkipAd = new JButton("Werbung ueberbruecken");
 
 	private JButton btnExit = new JButton("Ende");
 
@@ -60,12 +61,12 @@ public class HauptfensterView extends JFrame {
 
 	private JButton btnStumm = new JButton("stumm");
 
-	private JSlider lautstaerke = new JSlider();
-	
+	private JSlider volumeSlider = new JSlider();
+
 	/**
 	 * Create the frame.
 	 */
-	public HauptfensterView(HauptfensterModel model) {
+	public MainWindowView(MainWindowModel model) {
 		super("Fernseher");
 		this.model = model;
 		initializeFrame();
@@ -75,28 +76,18 @@ public class HauptfensterView extends JFrame {
 
 	private void initializeFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(null);
 		setBounds(100, 100, 450, 300);
 
 		contentPane = new JPanel();
-
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		btnWerbungUeberbruecken.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				werbungUeberbruecken();
-			}
-		});
-
-		
-
+		setContentPane(contentPane);
 	}
 
 	private void initializeButtons() {
-		btnWerbungUeberbruecken.setBounds(134, 193, 89, 23);
-		components.add(btnWerbungUeberbruecken);
+		btnSkipAd.setBounds(134, 193, 89, 23);
+		components.add(btnSkipAd);
 
 		btnSettings.setBounds(5, 5, 116, 23);
 		components.add(btnSettings);
@@ -122,8 +113,8 @@ public class HauptfensterView extends JFrame {
 		btnStumm.setBounds(334, 125, 89, 23);
 		components.add(btnStumm);
 
-		lautstaerke.setBounds(235, 88, 200, 26);
-		components.add(lautstaerke);
+		volumeSlider.setBounds(235, 88, 200, 26);
+		components.add(volumeSlider);
 
 		for (int i = 0; i < components.size(); i++) {
 			JComponent component = components.get(i);
@@ -143,16 +134,20 @@ public class HauptfensterView extends JFrame {
 		btnExit.addActionListener(listener);
 	}
 
-	private void werbungUeberbruecken() {
-
+	public void setSkipAdListener(ActionListener listener) {
+		btnSkipAd.addActionListener(listener);
 	}
 
 	public void setSettingsListener(ActionListener listener) {
 		btnSettings.addActionListener(listener);
 	}
-	
+
 	public void setClickListener(MouseAdapter listener) {
 		contentPane.addMouseListener(listener);
+	}
+	
+	public void setVolumeListener(ChangeListener listener) {
+		volumeSlider.addChangeListener(listener);
 	}
 
 }

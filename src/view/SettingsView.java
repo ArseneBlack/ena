@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Einstellungen extends JFrame {
+public class SettingsView extends JFrame {
 
 	private JPanel contentPane;
 
@@ -20,7 +20,7 @@ public class Einstellungen extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Einstellungen() {
+	public SettingsView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

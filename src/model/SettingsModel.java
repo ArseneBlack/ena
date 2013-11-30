@@ -3,18 +3,12 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EinstellungenModel {
-	public EinstellungenModel() {
+public class SettingsModel {
+	public SettingsModel() {
 		loadSettings();
 	}
 	
-	public int currentVolume() {
-		return this.volume;
-	}
-	
-	public void setVolume(int volume) {
-		this.volume = volume;
-	}
+
 	
 
 	private void loadSettings() {
