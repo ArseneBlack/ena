@@ -1,11 +1,5 @@
 package model;
 
-import java.util.HashSet;
-
-import javax.swing.JComponent;
-
-import view.SettingsView;
-
 public class MainWindowModel {
 	
 	private int volume;

@@ -1,51 +1,58 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
-import javax.swing.JLabel;
+
+import model.SettingsModel;
 
 public class SettingsView extends JFrame {
+	private static final long serialVersionUID = -1344462735704026323L;
 
-	private JPanel contentPane;
+	private SettingsModel model;
 
+	private JButton btnPassword = new JButton("Passwort festlegen");
+
+	private JButton btnChannelList = new JButton("Senderliste verwalten");
+
+	private JButton btnClose = new JButton("Schließen");
 
 	/**
 	 * Create the frame.
+	 * 
+	 * @param model
 	 */
-	public SettingsView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JButton btnNewButton = new JButton("Passwort festlegen");
-		btnNewButton.setBounds(162, 160, 136, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnSenderlisteVerwalten = new JButton("Senderliste verwalten");
-		btnSenderlisteVerwalten.setBounds(162, 103, 136, 23);
-		contentPane.add(btnSenderlisteVerwalten);
+	public SettingsView(SettingsModel model) {
+		super("Einstellungen");
+		this.model = model;
+		initializeFrame();
+		initializeButtons();
+	}
 
-		JButton btnClose = new JButton("Schließen");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SwingUtilities.getWindowAncestor(contentPane).dispose();
-			}
-		});
-		
-		btnClose.setBounds(0, 0, 136, 23);
-		contentPane.add(btnClose);
-		
-		this.setTitle("Einstellungen");
+	private void initializeFrame() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new FlowLayout());
+	}
+
+	private void initializeButtons() {
+		add(btnPassword);
+
+		add(btnChannelList);
+
+		add(btnClose);
+	}
+
+	public void setPasswordListener(ActionListener listener) {
+		btnPassword.addActionListener(listener);
+	}
+
+	public void setChannelListListener(ActionListener listener) {
+		btnChannelList.addActionListener(listener);
+	}
+
+	public void setCloseListener(ActionListener listener) {
+		btnClose.addActionListener(listener);
 	}
 }

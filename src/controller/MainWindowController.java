@@ -5,12 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JComponent;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import view.SettingsView;
 import view.MainWindowView;
 import model.MainWindowModel;
 
@@ -18,16 +16,19 @@ public class MainWindowController {
 	private MainWindowView view;
 
 	private MainWindowModel model;
+	
+	private static SettingsController settings;
+	
 
 	public MainWindowController() {
+		settings = new SettingsController();
 		model = new MainWindowModel();
-		view = new MainWindowView(this.model);
-		view.setVisible(true);
+		view = new MainWindowView(model);
 		addListeners();
 	}
 
 	public void showView() {
-
+		view.setVisible(true);
 	}
 
 	private void addListeners() {
@@ -46,8 +47,7 @@ public class MainWindowController {
 
 	class SettingsListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			SettingsView einst = new SettingsView();
-			einst.setVisible(true);
+			settings.showView();
 		}
 	}
 

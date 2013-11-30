@@ -1,40 +1,24 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.html.HTMLDocument.Iterator;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 import javax.swing.JSlider;
 
 import model.MainWindowModel;
 
-import org.omg.PortableInterceptor.SUCCESSFUL;
-
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseEvent;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.awt.event.MouseAdapter;
 
 public class MainWindowView extends JFrame {
+	private static final long serialVersionUID = 7643321161033183748L;
 
 	private JPanel contentPane;
 
@@ -63,9 +47,6 @@ public class MainWindowView extends JFrame {
 
 	private JSlider volumeSlider = new JSlider();
 
-	/**
-	 * Create the frame.
-	 */
 	public MainWindowView(MainWindowModel model) {
 		super("Fernseher");
 		this.model = model;
@@ -145,7 +126,7 @@ public class MainWindowView extends JFrame {
 	public void setClickListener(MouseAdapter listener) {
 		contentPane.addMouseListener(listener);
 	}
-	
+
 	public void setVolumeListener(ChangeListener listener) {
 		volumeSlider.addChangeListener(listener);
 	}
