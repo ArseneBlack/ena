@@ -20,4 +20,18 @@ public class PasswordModel {
 	public Boolean isSet() {
 		return password != null;
 	}
-}
+	
+	public boolean changePassword(String old , String newPasswort )
+	{
+		if(authenticate(old))
+		{
+			this.password = newPasswort;
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+		
+	}
+}  

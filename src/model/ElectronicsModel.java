@@ -4,14 +4,36 @@ import javax.swing.JPanel;
 
 public class ElectronicsModel {
 	private TvElectronics electronics;
+	
+	private static ElectronicsModel instance;
 
 	private long recordingStartTime;
 
 	Boolean isPaused;
 
 	Boolean isRecording;
-
-	public ElectronicsModel(JPanel mainDisplay, JPanel pipDisplay) {
+	
+	// Wenn noch kein Objekt existiert, wird eins erzeugt (privater Konstruktor wird aufgerufen)
+	// Wenn ein objekt existiert, wir dieses zurückgegeben.
+	public static ElectronicsModel createInstance(JPanel mainDisplay, JPanel pipDisplay) {  
+		if (instance == null) {
+			instance = new ElectronicsModel(mainDisplay, pipDisplay);
+		}
+		
+		return instance;
+	}
+	
+	public static ElectronicsModel getInstance()  throws NullPointerException {
+		if (instance == null) {
+			throw (new NullPointerException("Electronics Model must be created using createInstance first"));
+		} else {
+			return instance;
+		}
+	}
+	
+	// privater Konstruktor, wird von getInstance aufgerufen
+	// so kann immer nur ein Objekt dieser Klasse existieren
+	private ElectronicsModel(JPanel mainDisplay, JPanel pipDisplay) {
 		electronics = new TvElectronics(mainDisplay, pipDisplay);
 		isPaused = false;
 		isRecording = false;

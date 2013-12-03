@@ -17,31 +17,29 @@ public class SettingsView extends JFrame {
 
 	private JButton btnChannelList = new JButton("Senderliste verwalten");
 
-	private JButton btnClose = new JButton("Schließen");
+	private JButton btnClose = new JButton("Schlie\u00DFen");
 
 	/**
 	 * Create the frame.
-	 * 
-	 * @param model
 	 */
-	public SettingsView(SettingsModel model) {
+	public SettingsView() {
 		super("Einstellungen");
-		this.model = model;
+		this.model = new SettingsModel();
 		initializeFrame();
 		initializeButtons();
 	}
 
 	private void initializeFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
+		getContentPane().setLayout(new FlowLayout());
 	}
 
 	private void initializeButtons() {
-		add(btnPassword);
+		getContentPane().add(btnPassword);
 
-		add(btnChannelList);
+		getContentPane().add(btnChannelList);
 
-		add(btnClose);
+		getContentPane().add(btnClose);
 	}
 
 	public void setPasswordListener(ActionListener listener) {
