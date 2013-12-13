@@ -20,6 +20,7 @@ import javax.swing.JSlider;
 
 import model.ElectronicsModel;
 import model.MainWindowModel;
+import model.PasswordModel;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -34,6 +35,11 @@ public class MainWindowView extends JFrame {
 
 	private MainWindowModel model;
 	private ElectronicsModel electronics;
+
+	private PasswordModel passwordModel = new PasswordModel();
+	private SetPasswordView passwordView = new SetPasswordView(passwordModel);
+	private SettingsView settingsView = new SettingsView(passwordModel, passwordView);
+	private AuthenticateView authView = new AuthenticateView(passwordModel, settingsView);
 
 	private List<JComponent> components = new LinkedList<JComponent>();
 
@@ -58,7 +64,7 @@ public class MainWindowView extends JFrame {
 
 	private JSlider volumeSlider = new JSlider();
 
-	private SettingsView settings = new SettingsView();
+	
 
 	public MainWindowView(ElectronicsModel electronics) {
 		super("Fernseher");
@@ -251,7 +257,11 @@ public class MainWindowView extends JFrame {
 	}
 
 	private void showSettings() {
-		settings.setVisible(true);
+		if (!passwordModel.loggedIn() && passwordModel.isSet()) {
+				authView.setVisible(true);
+		} else {
+			settingsView.setVisible(true);
+		}
 	}
 
 	private void setVolume(int volume) {
