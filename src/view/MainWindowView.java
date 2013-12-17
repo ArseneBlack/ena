@@ -1,18 +1,25 @@
 package view;
 
 import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -26,12 +33,31 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyVetoException;
+
+import javax.swing.JSplitPane;
+
+import java.awt.BorderLayout;
+
+import javax.swing.BoxLayout;
+import javax.swing.JInternalFrame;
+
+import java.awt.Component;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Rectangle;
+
+import javax.swing.SpringLayout;
+
+import java.awt.FlowLayout;
 
 public class MainWindowView extends JFrame {
 	private static final long serialVersionUID = 7643321161033183748L;
 
 	private JPanel mainWindow;
 	private JPanel pipDisplay;
+	private JPanel controlPanel;
 
 	private MainWindowModel model;
 	private ElectronicsModel electronics;
@@ -46,69 +72,99 @@ public class MainWindowView extends JFrame {
 	private List<JComponent> components = new LinkedList<JComponent>();
 
 	// Buttons
-	private JButton btnSettings = new JButton("Einstellungen");
-
-	private JButton btnSkipAd = new JButton("Werbung ueberbruecken");
-
-	private JButton btnExit = new JButton("Ende");
-
-	private JButton btnPause = new JButton("Pause");
-
-	private JButton btnPreviousChannel = new JButton("vorheriger sender");
-
-	private JButton btnChannelList = new JButton("Senderliste");
-
-	private JButton btnNextChannel = new JButton("naechster Sender");
-
-	private JButton btnRemoveBorder = new JButton("Balken Entfernen");
-
-	private JButton btnMute = new JButton("stumm");
-
+	private JButton btnSettings = new JButton();
+	private JButton btnSkipAd = new JButton();
+	private JToggleButton btnPause = new JToggleButton();
+	private JButton btnPreviousChannel = new JButton();
+	private JButton btnChannelList = new JButton();
+	private JButton btnNextChannel = new JButton();
+	private JButton btnRemoveBorder = new JButton();
+	private JToggleButton btnMute = new JToggleButton();
 	private JSlider volumeSlider = new JSlider();
 
-	public MainWindowView(ElectronicsModel electronics) {
+	public MainWindowView(ElectronicsModel electronics)
+			throws PropertyVetoException {
 		super("Fernseher");
 		this.electronics = electronics;
-		this.model = new MainWindowModel(); // da sind die Daten
-											// gespeichert..lautst�rke ,
-											// senderliste..
+		this.model = new MainWindowModel();
+
+		// gespeichert..lautst�rke ,
+		// senderliste..
 		initializeFrame();
 		initializeButtons();
 		setVisible(true);
 	}
 
-	private void initializeFrame() {
+	private void initializeBottomPanel() {
+
+		JPanel panel = new JPanel();
+		getContentPane().add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		controlPanel = new JPanel();
+		panel.add(controlPanel);
+		controlPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+	}
+
+	private void initializeMainPanel() {
+		mainWindow = electronics.getMainDisplay();
+		mainWindow.setBounds(getBounds());
+		getContentPane().add(mainWindow, BorderLayout.CENTER);
+		mainWindow.addComponentListener(new ComponentListener() {
+
+			@Override
+			public void componentHidden(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void componentMoved(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void componentResized(ComponentEvent arg0) {
+				Rectangle b = arg0.getComponent().getBounds();
+				arg0.getComponent().setBounds(b.x, b.y, b.width, b.height);
+			}
+
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+	}
+
+	private void initializePipPanel() {
+		pipDisplay = electronics.getPipDisplay();
+		pipDisplay.setVisible(false);
+		getContentPane().add(pipDisplay, BorderLayout.EAST);
+	}
+
+	private void initializeFrame() throws PropertyVetoException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
-		mainWindow = electronics.getMainDisplay();
+		getContentPane().setLayout(new BorderLayout(0, 0));
+		initializeMainPanel();
+		initializePipPanel();
+		initializeBottomPanel();
+	}
+
+	private void initializeButtons() {
 		mainWindow.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				toggleButtonVisibility();
 			}
 		});
-		mainWindow.setBorder(new EmptyBorder(5, 5, 5, 5));
-		mainWindow.setLayout(null);
 
-		pipDisplay = new JPanel();
-
-		electronics = ElectronicsModel.createInstance(mainWindow, pipDisplay);
-
-		setContentPane(mainWindow);
-	}
-
-	private void initializeButtons() {
-		btnSkipAd.setBounds(134, 193, 89, 23);
-		btnSkipAd.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				skipAd();
-			}
-		});
-		components.add(btnSkipAd);
-
-		btnSettings.setBounds(5, 5, 116, 23);
+		Icon zahnrad = new ImageIcon(
+				ImageIcon.class.getResource("/view/zahnrad.png"));
+		btnSettings.setIcon(zahnrad);
 		btnSettings.addActionListener(new ActionListener() {
 
 			@Override
@@ -117,19 +173,21 @@ public class MainWindowView extends JFrame {
 			}
 		});
 		components.add(btnSettings);
-
-		btnExit.setBounds(300, 5, 89, 23);
-		btnExit.addActionListener(new ActionListener() {
-
+		components.add(new JSeparator());
+		Icon pipIcon = new ImageIcon(
+				ImageIcon.class.getResource("/view/pip.png"));
+		btnSkipAd.setIcon(pipIcon);
+		btnSkipAd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				exit();
+				skipAd();
 			}
-
 		});
-		components.add(btnExit);
+		components.add(btnSkipAd);
 
-		btnPause.setBounds(136, 227, 89, 23);
+		Icon pauseIcon = new ImageIcon(
+				ImageIcon.class.getResource("/view/pause.png"));
+		btnPause.setIcon(pauseIcon);
 		btnPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -138,7 +196,11 @@ public class MainWindowView extends JFrame {
 		});
 		components.add(btnPause);
 
-		btnPreviousChannel.setBounds(235, 227, 89, 23);
+		components.add(new JSeparator());
+
+		Icon upIcon = new ImageIcon(
+				ImageIcon.class.getResource("/view/arrow_up.png"));
+		btnPreviousChannel.setIcon(upIcon);
 		btnPreviousChannel.addActionListener(new ActionListener() {
 
 			@Override
@@ -148,8 +210,9 @@ public class MainWindowView extends JFrame {
 		});
 		components.add(btnPreviousChannel);
 
-		btnChannelList.setBounds(334, 227, 89, 23);
-
+		Icon listIcon = new ImageIcon(
+				ImageIcon.class.getResource("/view/list.png"));
+		btnChannelList.setIcon(listIcon);
 		btnChannelList.addActionListener(new ActionListener() {
 
 			@Override
@@ -160,7 +223,9 @@ public class MainWindowView extends JFrame {
 		});
 		components.add(btnChannelList);
 
-		btnNextChannel.setBounds(334, 193, 89, 23);
+		Icon downIcon = new ImageIcon(
+				ImageIcon.class.getResource("/view/arrow_down.png"));
+		btnNextChannel.setIcon(downIcon);
 		btnNextChannel.addActionListener(new ActionListener() {
 
 			@Override
@@ -172,46 +237,37 @@ public class MainWindowView extends JFrame {
 		});
 		components.add(btnNextChannel);
 
-		btnRemoveBorder.setBounds(334, 155, 89, 23);
+		components.add(new JSeparator());
+
+		Icon borderIcon = new ImageIcon(
+				ImageIcon.class.getResource("/view/border.png"));
+		btnRemoveBorder.setIcon(borderIcon);
 		btnRemoveBorder.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				removeBorder();
-			}
-		});
-		btnRemoveBorder.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-				removeBorder();
-
 			}
 		});
 		components.add(btnRemoveBorder);
 
-		btnMute.setBounds(334, 125, 89, 23);
+		components.add(new JSeparator());
+
+		Icon muteIcon = new ImageIcon(
+				ImageIcon.class.getResource("/view/speaker.png"));
+		btnMute.setIcon(muteIcon);
+		Icon mutedIcon = new ImageIcon(
+				ImageIcon.class.getResource("/view/mute.png"));
+		btnMute.setSelectedIcon(mutedIcon);
 		btnMute.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mute();
 			}
-		});
-		btnMute.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mute();
-
-			}
-
 		});
 		components.add(btnMute);
 
-		volumeSlider.setBounds(235, 88, 200, 26);
 		volumeSlider.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -226,7 +282,7 @@ public class MainWindowView extends JFrame {
 
 		for (int i = 0; i < components.size(); i++) {
 			JComponent component = components.get(i);
-			mainWindow.add(component);
+			controlPanel.add(component);
 			component.setVisible(false);
 		}
 	}
@@ -239,21 +295,18 @@ public class MainWindowView extends JFrame {
 	}
 
 	private void skipAd() {
-
+		pipDisplay.setVisible(!pipDisplay.isVisible());
 	}
 
 	private void togglePause() {
 		if (electronics.isPaused()) {
-			btnPause.setText("Pause");
+			btnPause.setSelected(false);
 			electronics.resume();
+
 		} else {
-			btnPause.setText("Fortsetzen");
+			btnPause.setSelected(true);
 			electronics.pause();
 		}
-	}
-
-	private void exit() {
-		System.exit(0);
 	}
 
 	private void showSettings() {
@@ -287,6 +340,7 @@ public class MainWindowView extends JFrame {
 	}
 
 	private void mute() {
+		btnMute.setSelected(btnMute.isSelected());
 
 		// TODO
 	}

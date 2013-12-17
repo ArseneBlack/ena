@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.Window.Type;
 
 public class AuthenticateView extends JFrame {
 	private PasswordModel passwordModel;
@@ -24,22 +25,24 @@ public class AuthenticateView extends JFrame {
 	public AuthenticateView(PasswordModel passwordModel,
 			SettingsView settingsView) {
 		super("Passwort Eingeben");
+		setResizable(false);
+		setAlwaysOnTop(true);
 		this.passwordModel = passwordModel;
 		getContentPane().setLayout(null);
 
 		this.settingsView = settingsView;
 
 		passwordField = new JPasswordField();
-		passwordField.setBounds(12, 12, 208, 20);
+		passwordField.setBounds(5, 25, 208, 20);
 		getContentPane().add(passwordField);
 
-		setBounds(100, 100, 400, 200);
+		setBounds(100, 100, 220, 80);
 		initializeButtons();
 
 	}
 
 	public void initializeButtons() {
-		btnOk.setBounds(12, 44, 98, 26);
+		btnOk.setBounds(5, 50, 95, 25);
 		btnOk.addActionListener(new ActionListener() {
 
 			@Override
@@ -49,7 +52,7 @@ public class AuthenticateView extends JFrame {
 		});
 		getContentPane().add(btnOk);
 
-		btnAbbrechen.setBounds(122, 44, 98, 26);
+		btnAbbrechen.setBounds(103, 50, 110, 25);
 		btnAbbrechen.addActionListener(new ActionListener() {
 
 			@Override
@@ -59,6 +62,10 @@ public class AuthenticateView extends JFrame {
 			}
 		});
 		getContentPane().add(btnAbbrechen);
+		
+		JLabel lblPasswortEingeben = new JLabel("Passwort Eingeben:");
+		lblPasswortEingeben.setBounds(5, 5, 142, 15);
+		getContentPane().add(lblPasswortEingeben);
 	}
 
 	public void showSettings() {

@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +24,13 @@ public class PicturePanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		int height = this.getHeight();
-		int width = this.getWidth();
+		int height = getHeight();
+		int width = getWidth();
 		int imageHeight = height * 9 / 16;
-		g.drawImage(image, 0, (height - imageHeight) / 2, width, 450 * 9 / 16,
+		int imagePosY = (height - imageHeight) / 2;
+		g.drawImage(image, 0, imagePosY, width, imageHeight,
 				null);
 	}
+	
+
 }
