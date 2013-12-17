@@ -70,7 +70,7 @@ public class MainWindowView extends JFrame {
 		super("Fernseher");
 		this.electronics = electronics;
 		this.model = new MainWindowModel(); // da sind die Daten
-											// gespeichert..lautstärke ,
+											// gespeichert..lautstï¿½rke ,
 											// senderliste..
 		initializeFrame();
 		initializeButtons();
@@ -81,7 +81,7 @@ public class MainWindowView extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 
-		mainWindow = new JPanel();
+		mainWindow = electronics.getMainDisplay();
 		mainWindow.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {

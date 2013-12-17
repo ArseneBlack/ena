@@ -14,7 +14,7 @@ public class ElectronicsModel {
 	Boolean isRecording;
 	
 	// Wenn noch kein Objekt existiert, wird eins erzeugt (privater Konstruktor wird aufgerufen)
-	// Wenn ein objekt existiert, wir dieses zurückgegeben.
+	// Wenn ein objekt existiert, wir dieses zurï¿½ckgegeben.
 	public static ElectronicsModel createInstance(JPanel mainDisplay, JPanel pipDisplay) {  
 		if (instance == null) {
 			instance = new ElectronicsModel(mainDisplay, pipDisplay);
@@ -71,5 +71,13 @@ public class ElectronicsModel {
 
 	public Boolean isPaused() {
 		return isPaused;
+	}
+	
+	public JPanel getMainDisplay() {
+		return electronics.mainDisplay;
+	}
+	
+	public JPanel getPipDisplay() {
+		return electronics.pipDisplay;
 	}
 }
