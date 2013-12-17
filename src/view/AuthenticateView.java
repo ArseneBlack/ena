@@ -21,20 +21,21 @@ public class AuthenticateView extends JFrame {
 	private JButton btnAbbrechen = new JButton("Abbrechen");
 	private JButton btnOk = new JButton("OK");
 
-	public AuthenticateView(PasswordModel passwordModel, SettingsView settingsView) {
+	public AuthenticateView(PasswordModel passwordModel,
+			SettingsView settingsView) {
 		super("Passwort Eingeben");
 		this.passwordModel = passwordModel;
 		getContentPane().setLayout(null);
 
 		this.settingsView = settingsView;
-        
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(12, 12, 208, 20);
 		getContentPane().add(passwordField);
-		
-		setBounds(100,100,400,200);
+
+		setBounds(100, 100, 400, 200);
 		initializeButtons();
-		
+
 	}
 
 	public void initializeButtons() {
@@ -50,11 +51,11 @@ public class AuthenticateView extends JFrame {
 
 		btnAbbrechen.setBounds(122, 44, 98, 26);
 		btnAbbrechen.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cancel();
-				
+
 			}
 		});
 		getContentPane().add(btnAbbrechen);
@@ -72,7 +73,7 @@ public class AuthenticateView extends JFrame {
 			// TODO: Fehlermeldung
 		}
 	}
-	
+
 	public void cancel() {
 		setVisible(false);
 	}

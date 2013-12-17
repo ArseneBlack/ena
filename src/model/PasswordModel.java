@@ -3,7 +3,7 @@ package model;
 public class PasswordModel {
 	private boolean loggedIn = false;
 	private String password = "1234";
-	
+
 	public Boolean setPassword(String newPassword, String oldPassword) {
 		if (!isSet() || (oldPassword.equals(this.password))) {
 			this.password = newPassword;
@@ -13,7 +13,7 @@ public class PasswordModel {
 			return false;
 		}
 	}
-	
+
 	public boolean login(String password) {
 		if (password.equals(this.password)) {
 			loggedIn = true;
@@ -22,30 +22,26 @@ public class PasswordModel {
 			return false;
 		}
 	}
-	
+
 	public void logout() {
 		this.loggedIn = false;
 	}
-	
+
 	public Boolean isSet() {
 		return password != null;
 	}
-	
-	public boolean changePassword(String old , String newPasswort )
-	{
-		if(login(old))
-		{
+
+	public boolean changePassword(String old, String newPasswort) {
+		if (login(old)) {
 			this.password = newPasswort;
 			return true;
-		}
-		else
-		{
+		} else {
 			return false;
-		}	
-		
+		}
+
 	}
-	
+
 	public boolean loggedIn() {
 		return loggedIn;
 	}
-}  
+}

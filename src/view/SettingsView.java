@@ -15,13 +15,12 @@ import model.SettingsModel;
 
 public class SettingsView extends JFrame {
 	private static final long serialVersionUID = -1344462735704026323L;
-	
+
 	JPanel contentPane = new JPanel();
 
 	private SettingsModel model;
 	private PasswordModel passwordModel;
 	private SetPasswordView passwordView;
-	
 
 	private JButton btnPassword = new JButton("Passwort festlegen");
 
@@ -32,7 +31,8 @@ public class SettingsView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SettingsView(PasswordModel passwordModel, SetPasswordView passwordView) {
+	public SettingsView(PasswordModel passwordModel,
+			SetPasswordView passwordView) {
 		super("Einstellungen");
 		setResizable(false);
 		this.model = new SettingsModel();
@@ -52,11 +52,11 @@ public class SettingsView extends JFrame {
 	private void initializeButtons() {
 		btnPassword.setBounds(20, 5, 145, 26);
 		btnPassword.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				showPasswordView();
-				
+
 			}
 		});
 		contentPane.setLayout(null);
@@ -67,18 +67,16 @@ public class SettingsView extends JFrame {
 		btnClose.setBounds(333, 5, 90, 26);
 
 		getContentPane().add(btnClose);
-		
+
 		btnClose.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				close();	
+				close();
 			}
 		});
-		
-	
-		
+
 	}
 
 	public void setPasswordListener(ActionListener listener) {
@@ -97,15 +95,13 @@ public class SettingsView extends JFrame {
 		btnPassword.setEnabled(false);
 		btnChannelList.setEnabled(false);
 	}
-	
-	public void showPasswordView()
-	{
+
+	public void showPasswordView() {
 		passwordView.setVisible(true);
-		
+
 	}
-	
-	public void close()
-	{
-	  setVisible(false);
+
+	public void close() {
+		setVisible(false);
 	}
 }

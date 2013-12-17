@@ -43,11 +43,11 @@ public class SetPasswordView extends JFrame {
 
 		btnSpeichern.setBounds(133, 216, 114, 23);
 		btnSpeichern.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				save();
-				
+
 			}
 		});
 		getContentPane().add(btnSpeichern);
@@ -97,10 +97,11 @@ public class SetPasswordView extends JFrame {
 	}
 
 	private void save() {
-		if (new String(newPasswordField.getPassword()).equals(new String(confirmPasswordField.getPassword()))) {
+		if (new String(newPasswordField.getPassword()).equals(new String(
+				confirmPasswordField.getPassword()))) {
 			String pwd = new String(oldPasswordField.getPassword());
-			boolean success = model.changePassword(pwd,
-					new String(newPasswordField.getPassword()));
+			boolean success = model.changePassword(pwd, new String(
+					newPasswordField.getPassword()));
 			if (success) {
 				setVisible(false);
 			} else {

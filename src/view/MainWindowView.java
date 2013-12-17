@@ -38,8 +38,10 @@ public class MainWindowView extends JFrame {
 
 	private PasswordModel passwordModel = new PasswordModel();
 	private SetPasswordView passwordView = new SetPasswordView(passwordModel);
-	private SettingsView settingsView = new SettingsView(passwordModel, passwordView);
-	private AuthenticateView authView = new AuthenticateView(passwordModel, settingsView);
+	private SettingsView settingsView = new SettingsView(passwordModel,
+			passwordView);
+	private AuthenticateView authView = new AuthenticateView(passwordModel,
+			settingsView);
 
 	private List<JComponent> components = new LinkedList<JComponent>();
 
@@ -63,8 +65,6 @@ public class MainWindowView extends JFrame {
 	private JButton btnMute = new JButton("stumm");
 
 	private JSlider volumeSlider = new JSlider();
-
-	
 
 	public MainWindowView(ElectronicsModel electronics) {
 		super("Fernseher");
@@ -258,7 +258,7 @@ public class MainWindowView extends JFrame {
 
 	private void showSettings() {
 		if (!passwordModel.loggedIn() && passwordModel.isSet()) {
-				authView.setVisible(true);
+			authView.setVisible(true);
 		} else {
 			settingsView.setVisible(true);
 		}
