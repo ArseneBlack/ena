@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 
 public class SetPasswordView extends JFrame {
 	private PasswordModel model;
@@ -29,19 +30,16 @@ public class SetPasswordView extends JFrame {
 
 	public SetPasswordView(PasswordModel model) {
 		super("Passwort Festlegen");
-		getContentPane().setMinimumSize(new Dimension(500, 300));
-		getContentPane().setPreferredSize(new Dimension(500, 350));
-		setResizable(false);
-		setAlwaysOnTop(true);
+
 		this.model = model;
 
 		initializeFrame();
 		getContentPane().setLayout(null);
 
-		lblNeuesPasswort.setBounds(115, 36, 92, 14);
+		lblNeuesPasswort.setBounds(5, 10, 107, 20);
 		getContentPane().add(lblNeuesPasswort);
 
-		btnSpeichern.setBounds(133, 216, 114, 23);
+		btnSpeichern.setBounds(5, 80, 110, 25);
 		btnSpeichern.addActionListener(new ActionListener() {
 
 			@Override
@@ -52,7 +50,7 @@ public class SetPasswordView extends JFrame {
 		});
 		getContentPane().add(btnSpeichern);
 
-		btnCancel.setBounds(257, 216, 121, 23);
+		btnCancel.setBounds(120, 80, 110, 25);
 		btnCancel.addActionListener(new ActionListener() {
 
 			@Override
@@ -65,21 +63,21 @@ public class SetPasswordView extends JFrame {
 		getContentPane().add(btnCancel);
 
 		oldPasswordField = new JPasswordField();
-		oldPasswordField.setBounds(239, 33, 139, 20);
+		oldPasswordField.setBounds(160, 5, 139, 20);
 		getContentPane().add(oldPasswordField);
 
 		newPasswordField = new JPasswordField();
-		newPasswordField.setBounds(239, 80, 139, 20);
+		newPasswordField.setBounds(160, 30, 140, 20);
 		getContentPane().add(newPasswordField);
 
 		confirmPasswordField = new JPasswordField();
-		confirmPasswordField.setBounds(239, 130, 139, 20);
+		confirmPasswordField.setBounds(160, 55, 140, 20);
 		getContentPane().add(confirmPasswordField);
 
-		lblNewLabel.setBounds(117, 86, 97, 14);
+		lblNewLabel.setBounds(5, 30, 116, 20);
 		getContentPane().add(lblNewLabel);
 
-		lblPasswortBesttigen.setBounds(90, 136, 139, 14);
+		lblPasswortBesttigen.setBounds(5, 55, 149, 20);
 		getContentPane().add(lblPasswortBesttigen);
 		lblMessage.setBounds(133, 184, 248, 14);
 
@@ -92,8 +90,9 @@ public class SetPasswordView extends JFrame {
 	}
 
 	private void initializeFrame() {
-		setBounds(200, 200, 500, 350);
-
+		setBounds(new Rectangle(200, 200, 305, 115));
+		setResizable(false);
+		setAlwaysOnTop(true);
 	}
 
 	private void save() {

@@ -1,6 +1,5 @@
 package view;
 
-import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -8,20 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JButton;
 
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JSlider;
 
@@ -32,23 +26,12 @@ import model.PasswordModel;
 import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.MouseAdapter;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
-
-import javax.swing.JSplitPane;
 
 import java.awt.BorderLayout;
 
-import javax.swing.BoxLayout;
-import javax.swing.JInternalFrame;
-
 import java.awt.Component;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Rectangle;
-
-import javax.swing.SpringLayout;
 
 import java.awt.FlowLayout;
 
@@ -64,8 +47,7 @@ public class MainWindowView extends JFrame {
 
 	private PasswordModel passwordModel = new PasswordModel();
 	private SetPasswordView passwordView = new SetPasswordView(passwordModel);
-	private SettingsView settingsView = new SettingsView(passwordModel,
-			passwordView);
+	private SettingsView settingsView = new SettingsView(passwordView);
 	private AuthenticateView authView = new AuthenticateView(passwordModel,
 			settingsView);
 
@@ -132,9 +114,7 @@ public class MainWindowView extends JFrame {
 			@Override
 			public void componentShown(ComponentEvent arg0) {
 				// TODO Auto-generated method stub
-
 			}
-
 		});
 	}
 
@@ -146,7 +126,7 @@ public class MainWindowView extends JFrame {
 
 	private void initializeFrame() throws PropertyVetoException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 600);
 
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		initializeMainPanel();
@@ -214,10 +194,8 @@ public class MainWindowView extends JFrame {
 				ImageIcon.class.getResource("/view/list.png"));
 		btnChannelList.setIcon(listIcon);
 		btnChannelList.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				openChannelList();
 			}
 		});
@@ -227,10 +205,8 @@ public class MainWindowView extends JFrame {
 				ImageIcon.class.getResource("/view/arrow_down.png"));
 		btnNextChannel.setIcon(downIcon);
 		btnNextChannel.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				zapDown();
 			}
 
@@ -243,7 +219,6 @@ public class MainWindowView extends JFrame {
 				ImageIcon.class.getResource("/view/border.png"));
 		btnRemoveBorder.setIcon(borderIcon);
 		btnRemoveBorder.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				removeBorder();
@@ -260,7 +235,6 @@ public class MainWindowView extends JFrame {
 				ImageIcon.class.getResource("/view/mute.png"));
 		btnMute.setSelectedIcon(mutedIcon);
 		btnMute.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mute();
@@ -269,7 +243,6 @@ public class MainWindowView extends JFrame {
 		components.add(btnMute);
 
 		volumeSlider.addChangeListener(new ChangeListener() {
-
 			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				JSlider slider = (JSlider) arg0.getSource();
