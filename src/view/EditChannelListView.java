@@ -6,15 +6,38 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JEditorPane;
 
+import model.EditChannelListModel;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.ListSelectionModel;
+import javax.swing.JScrollPane;
+
 public class EditChannelListView extends JFrame {
+	private JScrollPane scrollPane = new JScrollPane();
+	JScrollPane scrollPane_1 = new JScrollPane();
+	private EditChannelListModel editChannelListModel = new EditChannelListModel();
 	public EditChannelListView() {
 		getContentPane().setLayout(null);
-		
-		JList list = new JList();
-		list.setBounds(8, 49, 203, 212);
-		getContentPane().add(list);
+		setBounds(50, 50, 500, 500);
+		JList availableList = new JList(editChannelListModel.getListModel());
+		availableList.setBounds(8, 49, 203, 212);
+		availableList.scrollRectToVisible(getBounds());
+		scrollPane.setViewportView(availableList);
 		
 		JButton btnKanalscanDurchfhren = new JButton("Kanalscan durchführen");
+		btnKanalscanDurchfhren.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					editChannelListModel.scan();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btnKanalscanDurchfhren.setBounds(9, 266, 204, 25);
 		getContentPane().add(btnKanalscanDurchfhren);
 		
@@ -23,8 +46,9 @@ public class EditChannelListView extends JFrame {
 		getContentPane().add(lblVerfgbareSender);
 		
 		JList list_1 = new JList();
+		list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_1.setBounds(259, 49, 153, 212);
-		getContentPane().add(list_1);
+		scrollPane_1.setViewportView(list_1);
 		
 		JLabel lblFavoriten = new JLabel("Favoriten:");
 		lblFavoriten.setBounds(242, 24, 172, 15);
@@ -49,5 +73,14 @@ public class EditChannelListView extends JFrame {
 		JButton btnSpeichern = new JButton("Speichern");
 		btnSpeichern.setBounds(295, 266, 117, 25);
 		getContentPane().add(btnSpeichern);
+		
+		
+		scrollPane.setBounds(8, 49, 203, 213);
+		getContentPane().add(scrollPane);
+		
+		
+		
+		scrollPane_1.setBounds(259, 47, 152, 215);
+		getContentPane().add(scrollPane_1);
 	}
 }

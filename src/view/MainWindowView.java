@@ -38,7 +38,7 @@ import java.awt.FlowLayout;
 public class MainWindowView extends JFrame {
 	private static final long serialVersionUID = 7643321161033183748L;
 
-	private JPanel mainWindow;
+	private JPanel mainDisplay;
 	private JPanel pipDisplay;
 	private JPanel controlPanel;
 
@@ -46,8 +46,9 @@ public class MainWindowView extends JFrame {
 	private ElectronicsModel electronics;
 
 	private PasswordModel passwordModel = new PasswordModel();
-	private SetPasswordView passwordView = new SetPasswordView(passwordModel);
-	private SettingsView settingsView = new SettingsView(passwordView);
+	
+	//private SetPasswordView passwordView = new SetPasswordView(passwordModel);
+	private SettingsView settingsView = new SettingsView(passwordModel);
 	private AuthenticateView authView = new AuthenticateView(passwordModel,
 			settingsView);
 	private ChannelListView channelListView = new ChannelListView();
@@ -86,14 +87,16 @@ public class MainWindowView extends JFrame {
 		controlPanel = new JPanel();
 		panel.add(controlPanel);
 		controlPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		
+		
 	}
 
 	private void initializeMainPanel() {
-		mainWindow = electronics.getMainDisplay();
-		mainWindow.setBounds(getBounds());
-		getContentPane().add(mainWindow, BorderLayout.CENTER);
-		mainWindow.addComponentListener(new ComponentListener() {
-
+		mainDisplay = electronics.getMainDisplay();
+		mainDisplay.setBounds(getBounds());
+		getContentPane().add(mainDisplay, BorderLayout.CENTER);
+		mainDisplay.addComponentListener(new ComponentListener() {
+		
 			@Override
 			public void componentHidden(ComponentEvent arg0) {
 				// TODO Auto-generated method stub
@@ -122,7 +125,6 @@ public class MainWindowView extends JFrame {
 	private void initializePipPanel() {
 		pipDisplay = electronics.getPipDisplay();
 		pipDisplay.setVisible(false);
-		getContentPane().add(pipDisplay, BorderLayout.EAST);
 	}
 
 	private void initializeFrame() throws PropertyVetoException {
@@ -136,7 +138,7 @@ public class MainWindowView extends JFrame {
 	}
 
 	private void initializeButtons() {
-		mainWindow.addMouseListener(new MouseAdapter() {
+		mainDisplay.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				toggleButtonVisibility();

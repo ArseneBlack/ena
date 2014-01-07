@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import model.PasswordModel;
 import model.SettingsModel;
 
 public class SettingsView extends JFrame {
@@ -14,8 +15,9 @@ public class SettingsView extends JFrame {
 
 	JPanel contentPane = new JPanel();
 
-	private SettingsModel model;
-	private SetPasswordView passwordView;
+	private SettingsModel model = new SettingsModel();
+	private SetPasswordView passwordView; 
+	private EditChannelListView editChannelListView = new EditChannelListView();
 
 	private JButton btnPassword = new JButton("Passwort festlegen");
 
@@ -24,11 +26,11 @@ public class SettingsView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SettingsView(SetPasswordView passwordView) {
+	public SettingsView(PasswordModel passwordModel) {
 		super("Einstellungen");
 		setResizable(false);
-		this.model = new SettingsModel();
-		this.passwordView = passwordView;
+		passwordView = new SetPasswordView(passwordModel);
+		
 		initializeFrame();
 		initializeButtons();
 	}
@@ -51,6 +53,11 @@ public class SettingsView extends JFrame {
 		});
 		contentPane.setLayout(null);
 		getContentPane().add(btnPassword);
+		btnChannelList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editChannelListView.setVisible(true);
+			}
+		});
 		btnChannelList.setBounds(5, 35, 195, 25);
 
 		getContentPane().add(btnChannelList);
