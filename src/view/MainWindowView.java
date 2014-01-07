@@ -50,6 +50,7 @@ public class MainWindowView extends JFrame {
 	private SettingsView settingsView = new SettingsView(passwordView);
 	private AuthenticateView authView = new AuthenticateView(passwordModel,
 			settingsView);
+	private ChannelListView channelListView = new ChannelListView();
 
 	private List<JComponent> components = new LinkedList<JComponent>();
 
@@ -299,7 +300,7 @@ public class MainWindowView extends JFrame {
 	}
 
 	private void openChannelList() {
-		// TODO
+		channelListView.setVisible(true);
 	}
 
 	private void zapDown() {
