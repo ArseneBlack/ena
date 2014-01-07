@@ -46,19 +46,7 @@ public class SettingsModel {
 	}
 
 	public void saveSettings() {
-		try {
-			PrintWriter writer = new PrintWriter("settings.txt");
-			writer.println(volume);
-			writer.println(channel);
-			for (Map.Entry<Integer, String> channel : channelList.entrySet()) {
-				writer.println(channel);
-			}
-			writer.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	
 	}
 
 	private Map<Integer, String> channelList = new HashMap<Integer, String>();

@@ -2,7 +2,7 @@ package model;
 
 public class PasswordModel {
 	private boolean loggedIn = false;
-	private String password = "1234";
+	private String password;
 
 	public Boolean setPassword(String newPassword, String oldPassword) {
 		if (!isSet() || (oldPassword.equals(this.password))) {

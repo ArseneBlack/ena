@@ -90,6 +90,7 @@ public class SetPasswordView extends JFrame {
 	}
 
 	private void initializeFrame() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(200, 200, 305, 115));
 		setResizable(false);
 		setAlwaysOnTop(true);

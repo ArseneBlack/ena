@@ -34,6 +34,7 @@ import java.awt.Component;
 import java.awt.Rectangle;
 
 import java.awt.FlowLayout;
+import javax.swing.JLayeredPane;
 
 public class MainWindowView extends JFrame {
 	private static final long serialVersionUID = 7643321161033183748L;
@@ -41,6 +42,8 @@ public class MainWindowView extends JFrame {
 	private JPanel mainDisplay;
 	private JPanel pipDisplay;
 	private JPanel controlPanel;
+	
+	JLayeredPane layeredPane = new JLayeredPane();
 
 	private MainWindowModel model;
 	private ElectronicsModel electronics;
@@ -80,6 +83,9 @@ public class MainWindowView extends JFrame {
 	}
 
 	private void initializeBottomPanel() {
+		
+		
+		getContentPane().add(layeredPane, BorderLayout.CENTER);
 
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.SOUTH);
@@ -93,8 +99,8 @@ public class MainWindowView extends JFrame {
 
 	private void initializeMainPanel() {
 		mainDisplay = electronics.getMainDisplay();
-		mainDisplay.setBounds(getBounds());
-		getContentPane().add(mainDisplay, BorderLayout.CENTER);
+		mainDisplay.setBounds(0, 0, getWidth(), getHeight());
+		layeredPane.add(mainDisplay, 1);
 		mainDisplay.addComponentListener(new ComponentListener() {
 		
 			@Override
@@ -124,7 +130,9 @@ public class MainWindowView extends JFrame {
 
 	private void initializePipPanel() {
 		pipDisplay = electronics.getPipDisplay();
+		pipDisplay.setBounds(getWidth() - 200, getHeight() - 200, 200, 200);
 		pipDisplay.setVisible(false);
+		layeredPane.add(pipDisplay, 0);
 	}
 
 	private void initializeFrame() throws PropertyVetoException {

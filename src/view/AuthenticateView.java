@@ -23,6 +23,7 @@ public class AuthenticateView extends JFrame {
 	public AuthenticateView(PasswordModel passwordModel,
 			SettingsView settingsView) {
 		super("Passwort Eingeben");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationByPlatform(true);
 		setBounds(100, 100, 235, 105);
 		setResizable(false);

@@ -20,6 +20,7 @@ public class EditChannelListView extends JFrame {
 	JScrollPane scrollPane_1 = new JScrollPane();
 	private EditChannelListModel editChannelListModel = new EditChannelListModel();
 	public EditChannelListView() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		setBounds(50, 50, 500, 500);
 		JList availableList = new JList(editChannelListModel.getListModel());

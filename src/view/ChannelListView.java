@@ -9,6 +9,7 @@ import javax.swing.AbstractListModel;
 public class ChannelListView extends JFrame {
 	public ChannelListView() {
 		getContentPane().setLayout(null);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JList channelList = new JList();
 		channelList.setModel(new AbstractListModel() {

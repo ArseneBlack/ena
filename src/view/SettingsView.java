@@ -36,7 +36,7 @@ public class SettingsView extends JFrame {
 	}
 
 	private void initializeFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(200, 100, 205, 65);
 		setContentPane(contentPane);
 	}
