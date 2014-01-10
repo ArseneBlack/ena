@@ -1,7 +1,12 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import javax.swing.JPanel;
 
 /**
@@ -50,12 +55,37 @@ public class TvElectronics {
 	 * F�hrt den Kanalscan aus und liefert die verf�gbaren Kan�le.
 	 * 
 	 * @return die Daten aus Kanalscan.csv
+	 * @throws IOException
+	 * @throws NumberFormatException
 	 */
-	public ArrayList<Object> scanChannels() {
+	public ArrayList<Object> scanChannels() throws NumberFormatException,
+			IOException {
 		ArrayList<Object> channels = new ArrayList<Object>();
 
-		// TO DO (Aufgabe 5): Implementieren Sie hier das Einlesen von
-		// Kanalscan.csv!
+		// Datei zum lesen öffnen
+		FileReader freader = new FileReader("Kanalscan.csv");
+		BufferedReader breader = new BufferedReader(freader);
+
+		// erste Zeile ignorieren
+		breader.readLine();
+
+		// zeilenweise lesen
+		String line;
+		while ((line = breader.readLine()) != null) {
+			String[] lineData = line.split(";"); // die Daten zwischen den ";"
+													// in ein Array speichern
+
+			int frequency = Integer.parseInt(lineData[0]);
+			String channel = lineData[1];
+			int quality = Integer.parseInt(lineData[2]);
+			String name = lineData[3];
+			String provider = lineData[4];
+			Channel channelData = new Channel(frequency, channel, quality,
+					name, provider);
+			channels.add(channelData); // Daten in die Liste speichern
+		}
+
+		breader.close();
 
 		System.out.println("All channels scanned");
 		return channels;

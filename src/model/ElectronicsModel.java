@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -121,5 +122,9 @@ public class ElectronicsModel {
 
 	public int getVolume() {
 		return data.getVolume();
+	}
+	
+	public ArrayList<Object> scanChannels() throws NumberFormatException, IOException {
+		return electronics.scanChannels();
 	}
 }
