@@ -162,7 +162,9 @@ public class MainWindowView extends JFrame {
 				showSettings();
 			}
 		});
+		btnSettings.setToolTipText("Einstellungen");
 		components.add(btnSettings);
+		
 		components.add(new JSeparator());
 		Icon pipIcon = new ImageIcon(
 				ImageIcon.class.getResource("/view/pip.png"));
@@ -173,6 +175,7 @@ public class MainWindowView extends JFrame {
 				skipAd();
 			}
 		});
+		btnSkipAd.setToolTipText("Werbung überbrücken");
 		components.add(btnSkipAd);
 
 		Icon pauseIcon = new ImageIcon(
@@ -184,6 +187,7 @@ public class MainWindowView extends JFrame {
 				togglePause();
 			}
 		});
+		btnPause.setToolTipText("Pause An/Aus");
 		components.add(btnPause);
 
 		components.add(new JSeparator());
@@ -198,6 +202,7 @@ public class MainWindowView extends JFrame {
 				zapUp();
 			}
 		});
+		btnPreviousChannel.setToolTipText("Vorheriger Sender");
 		components.add(btnPreviousChannel);
 
 		Icon listIcon = new ImageIcon(
@@ -209,6 +214,7 @@ public class MainWindowView extends JFrame {
 				openChannelList();
 			}
 		});
+		btnChannelList.setToolTipText("Senderliste");
 		components.add(btnChannelList);
 
 		Icon downIcon = new ImageIcon(
@@ -221,6 +227,7 @@ public class MainWindowView extends JFrame {
 			}
 
 		});
+		btnNextChannel.setToolTipText("Nächster Sender");
 		components.add(btnNextChannel);
 
 		components.add(new JSeparator());
@@ -234,7 +241,9 @@ public class MainWindowView extends JFrame {
 				removeBorder();
 			}
 		});
+		btnRemoveBorder.setToolTipText("Ränder An/Aus");
 		components.add(btnRemoveBorder);
+		
 
 		components.add(new JSeparator());
 
@@ -250,6 +259,7 @@ public class MainWindowView extends JFrame {
 				mute();
 			}
 		});
+		btnMute.setToolTipText("Ton An/Aus");
 		components.add(btnMute);
 
 		volumeSlider.addChangeListener(new ChangeListener() {
