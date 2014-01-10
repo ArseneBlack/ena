@@ -27,13 +27,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.awt.event.MouseAdapter;
 import java.beans.PropertyVetoException;
-
 import java.awt.BorderLayout;
-
 import java.awt.Component;
 import java.awt.Rectangle;
-
 import java.awt.FlowLayout;
+
 import javax.swing.JLayeredPane;
 
 public class MainWindowView extends JFrame {
@@ -69,11 +67,11 @@ public class MainWindowView extends JFrame {
 	private JToggleButton btnMute = new JToggleButton();
 	private JSlider volumeSlider = new JSlider();
 
-	public MainWindowView(ElectronicsModel electronics)
+	public MainWindowView()
 			throws PropertyVetoException {
 		super("Fernseher");
-		this.electronics = electronics;
-		this.model = new MainWindowModel();
+		electronics = ElectronicsModel.getInstance();
+		model = new MainWindowModel();
 
 		// gespeichert..lautst�rke ,
 		// senderliste..
@@ -258,7 +256,12 @@ public class MainWindowView extends JFrame {
 			public void stateChanged(ChangeEvent arg0) {
 				JSlider slider = (JSlider) arg0.getSource();
 				int volume = slider.getValue();
-				setVolume(volume);
+				try {
+					setVolume(volume);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 		});
@@ -301,7 +304,7 @@ public class MainWindowView extends JFrame {
 		}
 	}
 
-	private void setVolume(int volume) {
+	private void setVolume(int volume) throws Exception {
 		model.setVolume(volume);
 	}
 

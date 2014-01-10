@@ -1,15 +1,13 @@
 package model;
 
-public class MainWindowModel {
-
-	private TvElectronics electronics;
-	private int volume;
+public class MainWindowModel {	
+	private PersistentData data = PersistentData.getInstance();
 
 	public int currentVolume() {
-		return this.volume;
+		return data.getVolume();
 	}
 
-	public void setVolume(int volume) {
-		this.volume = volume;
+	public void setVolume(int volume) throws Exception {
+		data.setVolume(volume);
 	}
 }

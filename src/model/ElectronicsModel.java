@@ -2,41 +2,35 @@ package model;
 
 import javax.swing.JPanel;
 
+import view.PicturePanel;
+
 public class ElectronicsModel {
 	private TvElectronics electronics;
-	private static ElectronicsModel instance;
+	
 	private long recordingStartTime;
 	Boolean isPaused;
 	Boolean isRecording;
 
-	// Wenn noch kein Objekt existiert, wird eins erzeugt (privater Konstruktor
-	// wird aufgerufen)
-	// Wenn ein objekt existiert, wir dieses zur�ckgegeben.
-	public static ElectronicsModel createInstance(JPanel mainDisplay,
-			JPanel pipDisplay) {
+	// Singleton
+	private static ElectronicsModel instance;
+	private ElectronicsModel() {
+		JPanel mainDisplay = new PicturePanel("./src/view/16_9.jpg");
+		JPanel pipDisplay = new PicturePanel("./src/view/16_9.jpg");
+		electronics = new TvElectronics(mainDisplay, pipDisplay);
+		isPaused = false;
+		isRecording = false;
+	}
+	public static ElectronicsModel getInstance() {
 		if (instance == null) {
-			instance = new ElectronicsModel(mainDisplay, pipDisplay);
+			instance = new ElectronicsModel();
 		}
 
 		return instance;
 	}
 
-	public static ElectronicsModel getInstance() throws NullPointerException {
-		if (instance == null) {
-			throw (new NullPointerException(
-					"Electronics Model must be created using createInstance first"));
-		} else {
-			return instance;
-		}
-	}
-
 	// privater Konstruktor, wird von getInstance aufgerufen
 	// so kann immer nur ein Objekt dieser Klasse existieren
-	private ElectronicsModel(JPanel mainDisplay, JPanel pipDisplay) {
-		electronics = new TvElectronics(mainDisplay, pipDisplay);
-		isPaused = false;
-		isRecording = false;
-	}
+	
 
 	public void pause() {
 		try {
@@ -78,5 +72,9 @@ public class ElectronicsModel {
 
 	public JPanel getPipDisplay() {
 		return electronics.pipDisplay;
+	}
+	
+	public void setVolume(int volume) throws Exception {
+		electronics.setVolume(volume);
 	}
 }
