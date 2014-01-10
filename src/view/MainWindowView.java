@@ -37,6 +37,8 @@ import javax.swing.JLayeredPane;
 public class MainWindowView extends JFrame {
 	private static final long serialVersionUID = 7643321161033183748L;
 
+	private ElectronicsModel electronics = ElectronicsModel.getInstance();
+	
 	private JPanel mainDisplay;
 	private JPanel pipDisplay;
 	private JPanel controlPanel;
@@ -44,7 +46,6 @@ public class MainWindowView extends JFrame {
 	JLayeredPane layeredPane = new JLayeredPane();
 
 	private MainWindowModel model;
-	private ElectronicsModel electronics;
 
 	private PasswordModel passwordModel = new PasswordModel();
 	
@@ -258,6 +259,7 @@ public class MainWindowView extends JFrame {
 				int volume = slider.getValue();
 				try {
 					setVolume(volume);
+					volumeSlider.setToolTipText(new Integer(volume).toString());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -265,6 +267,7 @@ public class MainWindowView extends JFrame {
 			}
 
 		});
+		volumeSlider.setValue(electronics.getVolume());
 		components.add(volumeSlider);
 
 		for (int i = 0; i < components.size(); i++) {

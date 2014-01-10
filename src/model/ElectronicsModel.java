@@ -1,11 +1,18 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JPanel;
 
 import view.PicturePanel;
 
 public class ElectronicsModel {
 	private TvElectronics electronics;
+	private static PersistentData data;
 	
 	private long recordingStartTime;
 	Boolean isPaused;
@@ -23,6 +30,13 @@ public class ElectronicsModel {
 	public static ElectronicsModel getInstance() {
 		if (instance == null) {
 			instance = new ElectronicsModel();
+			loadData();
+			Runtime.getRuntime().addShutdownHook(new Thread() {
+				@Override
+				public void run() {
+					saveData();
+				}
+			});
 		}
 
 		return instance;
@@ -74,7 +88,38 @@ public class ElectronicsModel {
 		return electronics.pipDisplay;
 	}
 	
+	private static void loadData() {
+		try {
+			FileInputStream in = new FileInputStream("persistent.dat");
+			ObjectInputStream s = new ObjectInputStream(in);
+			data = (PersistentData) s.readObject();
+			s.close();
+		} catch (IOException | ClassNotFoundException e) {
+			data = new PersistentData();
+		}
+
+	}
+
+	private static void saveData() {
+
+		try {
+			FileOutputStream fileStream = new FileOutputStream("persistent.dat");
+			ObjectOutputStream objectStream = new ObjectOutputStream(fileStream);
+			objectStream.writeObject(data);
+			objectStream.flush();
+			objectStream.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void setVolume(int volume) throws Exception {
 		electronics.setVolume(volume);
+		data.setVolume(volume);
+	}
+
+	public int getVolume() {
+		return data.getVolume();
 	}
 }

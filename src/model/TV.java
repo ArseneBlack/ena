@@ -1,5 +1,8 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 import view.MainWindowView;
 
 public class TV {
@@ -13,5 +16,4 @@ public class TV {
 			e.printStackTrace();
 		}
 	}
-
 }

@@ -1,13 +1,13 @@
 package model;
 
 public class MainWindowModel {	
-	private PersistentData data = PersistentData.getInstance();
+	private ElectronicsModel electronics = ElectronicsModel.getInstance();
 
 	public int currentVolume() {
-		return data.getVolume();
+		return electronics.getVolume();
 	}
 
 	public void setVolume(int volume) throws Exception {
-		data.setVolume(volume);
+		electronics.setVolume(volume);
 	}
 }

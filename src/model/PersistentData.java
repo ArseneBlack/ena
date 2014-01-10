@@ -1,36 +1,23 @@
 package model;
 
-import javax.swing.DefaultListModel;
+import java.io.Serializable;
+import java.util.Map;
 
-public class PersistentData {
-	private DefaultListModel channelList;
+public class PersistentData implements Serializable {
 	private int volume;
-	
-	// Singleton
-	private static PersistentData instance = null;
-	private PersistentData() {
-		load();
-	};
-	public static PersistentData getInstance() {
-		if (instance == null) {
-			instance = new PersistentData();
-		}
-		
-		return instance;
-	}
-	
-	public void load() {
-	}
-	
-	public void save() {
-	
-	}
+	private int currentChannel;
+	private Map<Integer, Channel> channels;
 	
 	public void setVolume(int volume) {
 		this.volume = volume;
 	}
 	
 	public int getVolume() {
-		return volume;
+		return this.volume;
 	}
+	
+	public int getCurrentChannel() {
+		return currentChannel;
+	}
+
 }
