@@ -17,8 +17,9 @@ public class EditChannelListModel {
 	}
 
 	public void scan() throws IOException {
+		listData.clear();
 		ArrayList<Object> scanResult = electronics.scanChannels();
-
+		
 		for (Object o : scanResult) {
 			Channel channel = (Channel) o;
 			listData.addElement(channel.getName());
